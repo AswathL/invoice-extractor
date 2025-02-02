@@ -1,0 +1,4 @@
+﻿Invoice Number,Invoice Date,Vendor Name,Item Description,Quantity,Price,Total Amount,Tax Amount,Discount,Grand Total
+IN-001,29/01/2019,Saffron Design,Frontend design restructure,1,"9,999.00","12,246.00","1,469.62",None,"13,715.52"
+IN-001,29/01/2019,Saffron Design,Custom icon package,2,"1,950.00","12,246.00","1,469.62",None,"13,715.52"
+IN-001,29/01/2019,Saffron Design,Gandhi mouse pad,3,99.00,"12,246.00","1,469.62",None,"13,715.52"
