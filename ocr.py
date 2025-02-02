@@ -5,20 +5,28 @@ import pandas as pd
 import json
 import streamlit as st
 from pdf2image import convert_from_bytes  # For handling PDF uploads
+import requests
+import base64
 
 # Step 1: Extract text from an image or PDF using Tesseract
 def extract_text_from_image(image):
     """
-    Extracts text from an image using Tesseract OCR.
+    Extracts text from an image using OCR.space API.
     """
-    return pytesseract.image_to_string(image)
+    api_key = "K85069300088957"  # Replace with your API key
+    image_bytes = image.tobytes()
+    encoded_image = base64.b64encode(image_bytes).decode('utf-8')
 
-def extract_text_from_pdf(pdf_file):
-    """
-    Extracts text from a PDF file by converting each page to an image and then using Tesseract OCR.
-    """
-    pages = convert_from_bytes(pdf_file.read())
-    return "\n".join([extract_text_from_image(page) for page in pages])
+    url = "https://api.ocr.space/parse/image"
+    headers = {"apikey": api_key}
+    data = {"base64Image": f"data:image/png;base64,{encoded_image}", "language": "eng"}
+
+    response = requests.post(url, headers=headers, data=data)
+    
+    if response.status_code == 200:
+        return response.json()["ParsedResults"][0]["ParsedText"]
+    else:
+        return "OCR failed"
 
 # Step 2: Process extracted text with Ollama
 def process_text_with_ollama(text):

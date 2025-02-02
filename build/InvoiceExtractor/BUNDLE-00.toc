@@ -1,3 +1,0 @@
-([('InvoiceExtractor',
-   '/Users/aswathleelakrishnan/Documents/deepak/dist/InvoiceExtractor',
-   'EXECUTABLE')],)
